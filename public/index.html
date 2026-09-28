@@ -92,7 +92,8 @@ header nav{display:flex;gap:3px}
 .mobile-nav{display:none}
 @media(max-width:768px){
   header{padding:0 16px;height:58px}
-  header nav{display:none}
+    header nav{display:flex;gap:6px;align-items:center}
+  header nav .nav-btn{display:none}	
   .trip-badge{display:none}
   .mobile-nav{
     display:flex;position:fixed;bottom:0;left:0;right:0;
@@ -405,6 +406,9 @@ select option{background:var(--bg3)}
 /* ── SECTION HEADER ── */
 .sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .sec-title{font-size:1rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px}
+
+.user-menu-settings{display:none}
+@media(max-width:768px){.user-menu-settings{display:block}}
 </style>
 </head>
 <body>
@@ -953,6 +957,7 @@ function renderUserBadge(){
         <span class="user-badge-name">${name}</span>
         <div class="user-menu" id="${menuId}">
           <div class="user-menu-email">${currentUser.email||''}</div>
+	${i===1?`<button class="user-menu-item user-menu-settings" onclick="openSettingsMobile()">⚙️ Баптаулар</button>`:''}
           <button class="user-menu-item" onclick="logout()">🚪 Шығу</button>
         </div>
       </div>`;
@@ -1068,6 +1073,11 @@ function switchTab(tab){
 function mnActive(btn){
   document.querySelectorAll('.mn-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
+}
+
+function openSettingsMobile(){
+  switchTab('settings');
+  document.querySelectorAll('.mn-btn').forEach(b=>b.classList.remove('active'));
 }
 
 // ═══════════════════════════════════════════
